@@ -1,14 +1,44 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, msg in messages %}
+      {% if category == 'success' %}
+        <p style="color:rgb(193, 11, 11)">{{ msg }}</p>
+      {% elif category == 'error' %}
+        <p style="color:red">{{ msg }}</p>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<h2>Iniciar Sesión</h2>
-<form method="post">
-    <input type="text" name="username" placeholder="Usuario" required><br><br>
-    <input type="password" name="password" placeholder="Contraseña" required><br><br>
-    <button type="submit">Ingresar</button>
-</form>
-<a href="{{ url_for('registro') }}">Registrarse</a>
+<h2> <b>BIENVENIDO <br> <b> inicie sesión </h2>
+
+    <form method="post">
+        <div style="display:flex; align-items:center; margin-bottom:15px;">
+            <label for="username" style="width:160px; text-align:right; margin-right:10px;">
+                Ingrese un usuario:
+            </label>
+            <input type="text" id="username" name="username" required>
+        </div>
+    
+        <div style="display:flex; align-items:center; margin-bottom:15px;">
+            <label for="password" style="width:160px; text-align:right; margin-right:10px;">
+                Ingrese contraseña:
+            </label>
+            <input type="password" id="password" name="password" required>
+        </div>
+    
+        <button type="submit">INGRESAR</button>
+    </form>
+    
+
+<a href="{{ url_for('registro') }}">REGISTRARSE</a>
+{% if mensaje %}
+<p style="color:rgb(223, 12, 12)">{{ mensaje }}</p>
+{% endif %}
 {% if error %}
-<p style="color:red">{{ error }}</p>
+<p style="color:rgb(198, 7, 7)">{{ error }}</p>
 {% endif %}
 {% endblock %}

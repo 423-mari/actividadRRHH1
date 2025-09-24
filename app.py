@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 
 app = Flask(__name__)
 app.secret_key = "clave_secreta"  # Necesaria para manejar sesiones
 
 # Guardaremos los usuarios en la sesión (diccionario)
-# Estructura: { "usuario": {"password": "xxx", "color": "#xxxxxx"} }
 
 usuarios = {}  
 
@@ -23,10 +22,12 @@ def registro():
         color = request.form["color"]
 
         if username in usuarios:
-            return render_template("registro.html", error="El usuario ya existe")
+            flash("El usuario ya existe", "error")
+            return redirect(url_for("registro"))
 
         usuarios[username] = {"password": password, "color": color}
-        return redirect(url_for("login"))
+        flash("Usuario registrado exitosamente", "success")
+        return redirect(url_for("login")) #redirige al login
 
     return render_template("registro.html")
 

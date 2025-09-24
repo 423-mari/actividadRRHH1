@@ -1,17 +1,37 @@
-
 {% extends "base.html" %}
 {% block title %}Registro{% endblock %}
 {% block content %}
 <h2>Registro de Usuario</h2>
+
 <form method="post">
-    <input type="text" name="username" placeholder="Usuario" required><br><br>
-    <input type="password" name="password" placeholder="Contraseña" required><br><br>
-    <label>Color favorito:</label>
-    <input type="color" name="color" required><br><br>
-    <button type="submit">Registrar</button>
+
+    <div style="display:flex ; margin-bottom:15px;">
+        <label for="username" style="width:160px; text-align:right; margin-right:10px;"> <b>
+            Ingrese nuevo usuario:
+        </label>
+        <input type="text" id="username" name="username" required>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-bottom:15px;">
+        <label for="password" style="width:160px; text-align:right; margin-right:10px;">
+            Ingrese contraseña:
+        </label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <div style="display:flex; align-items:center; margin-bottom:15px;">
+        <label for="color" style="width:160px; text-align:right; margin-right:10px;">
+            Color favorito:
+        </label>
+        <input type="color" id="color" name="color" required>
+    </div>
+
+    <button type="submit">REGISTRAR </button>
 </form>
+<br>
 <a href="{{ url_for('login') }}">Volver al Login</a>
+
 {% if error %}
-<p style="color:red">{{ error }}</p>
+<p style="color:rgb(134, 22, 186)">{{ error }}</p>
 {% endif %}
 {% endblock %}
